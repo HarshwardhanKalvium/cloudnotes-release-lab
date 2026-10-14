@@ -1,16 +1,43 @@
-# Example terraform.tfvars for CloudNotes infrastructure
+# Example terraform.tfvars for CloudNotes full infrastructure
 # Copy this file to terraform.tfvars and update with your values
 
-project        = "cloudnotes"
-environment    = "dev"
-region         = "us-central1"
-zone           = "us-central1-a"
-web_cidr       = "10.0.0.0/24"
-app_cidr       = "10.0.1.0/24"
-machine_type   = "e2-medium"
-bucket_name    = "cloudnotes-artifacts"
-storage_class  = "STANDARD"
+project          = "cloudnotes"
+environment      = "dev"
+region           = "us-central1"
+zone             = "us-central1-a"
 
+# Network CIDRs
+web_subnet_cidr  = "10.0.0.0/24"
+app_subnet_cidr  = "10.0.1.0/24"
+db_subnet_cidr   = "10.0.2.0/24"
+
+# Compute
+machine_type     = "e2-medium"
+
+# Database
+db_engine        = "postgres"
+db_version       = "14"
+db_tier          = "db-f1-micro"
+
+# Storage
+bucket_name      = "cloudnotes-artifacts"
+storage_class    = "STANDARD"
+
+# IAM
+app_sa_name      = "cloudnotes-app-sa"
+
+iam_roles = [
+  {
+    role     = "roles/storage.objectAdmin"
+    resource = "cloudnotes-artifacts"
+  },
+  {
+    role     = "roles/cloudsql.client"
+    resource = "cloudnotes-db"
+  }
+]
+
+# Firewall rules
 firewall_rules = [
   {
     protocol = "tcp"

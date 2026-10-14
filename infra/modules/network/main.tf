@@ -18,15 +18,39 @@ resource "local_file" "vpc" {
   })
 }
 
-# Subnet resource
-resource "local_file" "subnet" {
-  filename = "${path.module}/../../.generated/${var.network_name}-subnet.json"
+# Web subnet (public-facing)
+resource "local_file" "web_subnet" {
+  filename = "${path.module}/../../.generated/${var.network_name}-web-subnet.json"
   content = jsonencode({
-    name        = "${var.network_name}-subnet"
+    name        = "${var.network_name}-web-subnet"
     vpc_name    = "${var.network_name}-vpc"
-    cidr        = var.cidr
+    cidr        = var.web_subnet_cidr
     region      = var.region
-    description = "Subnet for ${var.network_name}"
+    description = "Web subnet for ${var.network_name} (public-facing)"
+  })
+}
+
+# App subnet (application tier)
+resource "local_file" "app_subnet" {
+  filename = "${path.module}/../../.generated/${var.network_name}-app-subnet.json"
+  content = jsonencode({
+    name        = "${var.network_name}-app-subnet"
+    vpc_name    = "${var.network_name}-vpc"
+    cidr        = var.app_subnet_cidr
+    region      = var.region
+    description = "App subnet for ${var.network_name} (application tier)"
+  })
+}
+
+# Database subnet (private tier)
+resource "local_file" "db_subnet" {
+  filename = "${path.module}/../../.generated/${var.network_name}-db-subnet.json"
+  content = jsonencode({
+    name        = "${var.network_name}-db-subnet"
+    vpc_name    = "${var.network_name}-vpc"
+    cidr        = var.db_subnet_cidr
+    region      = var.region
+    description = "Database subnet for ${var.network_name} (private tier)"
   })
 }
 
