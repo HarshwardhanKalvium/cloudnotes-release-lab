@@ -3,11 +3,6 @@ variable "network_name" {
   type        = string
 }
 
-variable "cidr" {
-  description = "CIDR block for the subnet"
-  type        = string
-}
-
 variable "region" {
   description = "Cloud region where network resources will be deployed"
   type        = string
@@ -17,6 +12,21 @@ variable "project" {
   description = "Project identifier"
   type        = string
   default     = "cloudnotes"
+}
+
+variable "web_subnet_cidr" {
+  description = "CIDR block for the web subnet (public-facing)"
+  type        = string
+}
+
+variable "app_subnet_cidr" {
+  description = "CIDR block for the app subnet (application tier)"
+  type        = string
+}
+
+variable "db_subnet_cidr" {
+  description = "CIDR block for the database subnet (private database tier)"
+  type        = string
 }
 
 variable "firewall_rules" {
