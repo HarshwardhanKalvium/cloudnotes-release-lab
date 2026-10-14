@@ -1,0 +1,18 @@
+# Example terraform.tfvars for CloudNotes infrastructure
+# Copy this file to terraform.tfvars and update with your values
+
+project        = "cloudnotes"
+environment    = "dev"
+region         = "us-central1"
+zone           = "us-central1-a"
+subnet_cidr    = "10.0.0.0/24"
+machine_type   = "e2-medium"
+bucket_name    = "cloudnotes-artifacts"
+storage_class  = "STANDARD"
+
+firewall_rules = [
+  {
+    protocol = "tcp"
+    ports    = ["22", "80", "443"]
+  }
+]
