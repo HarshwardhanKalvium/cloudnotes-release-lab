@@ -22,10 +22,16 @@ variable "zone" {
   default     = "us-central1-a"
 }
 
-variable "subnet_cidr" {
-  description = "CIDR block for the subnet"
+variable "web_cidr" {
+  description = "CIDR block for the web subnet"
   type        = string
   default     = "10.0.0.0/24"
+}
+
+variable "app_cidr" {
+  description = "CIDR block for the app subnet"
+  type        = string
+  default     = "10.0.1.0/24"
 }
 
 variable "machine_type" {

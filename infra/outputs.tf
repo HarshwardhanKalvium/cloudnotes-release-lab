@@ -1,11 +1,21 @@
-output "vpc_name" {
-  description = "Name of the VPC network"
-  value       = "${var.project}-vpc"
+output "web_vpc_name" {
+  description = "Name of the web tier VPC network"
+  value       = module.web_network.vpc_name
 }
 
-output "subnet_cidr" {
-  description = "CIDR block of the subnet"
-  value       = var.subnet_cidr
+output "web_subnet_cidr" {
+  description = "CIDR block of the web subnet"
+  value       = module.web_network.subnet_cidr
+}
+
+output "app_vpc_name" {
+  description = "Name of the app tier VPC network"
+  value       = module.app_network.vpc_name
+}
+
+output "app_subnet_cidr" {
+  description = "CIDR block of the app subnet"
+  value       = module.app_network.subnet_cidr
 }
 
 output "instance_name" {
